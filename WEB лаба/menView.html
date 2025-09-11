@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>А Пахне Як — Рецепти</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Kelly Slab", cursive;
+      background: #fdfbf7;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* 🔹 Верхня панель */
+    header {
+      background: #9E3838;
+      color: #C9896D;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .menu-btn {
+      font-size: 26px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #C9896D;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-btn:hover {
+      transform: scale(1.2);
+    }
+
+    /* 🔹 Друга панель */
+    .sub-header {
+      background: #C9896D;
+      color: #9E3838;
+      padding: 12px 30px;
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      padding: 8px 14px;
+      border-radius: 25px;
+      width: 250px;
+      border: 2px solid #9E3838;
+    }
+
+    .search-box input {
+      border: none;
+      outline: none;
+      font-size: 15px;
+      flex: 1;
+      background: transparent;
+      color: #333;
+    }
+
+    /* 🔹 Бокове меню */
+    .sidebar {
+      position: fixed;
+      left: -240px;
+      top: 0;
+      width: 240px;
+      height: 100%;
+      background: #F3D9A2;
+      display: flex;
+      flex-direction: column;
+      padding-top: 60px;
+      transition: 0.4s ease;
+      box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #9E3838;
+      text-decoration: none;
+      font-size: 20px;
+      padding: 15px 25px;
+      margin: 5px 0;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      background: rgba(158, 56, 56, 0.2);
+      padding-left: 35px;
+    }
+
+    /* 🔹 Overlay для закриття сайдбару */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      display: none;
+      z-index: 500;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+    /* 🔹 Секція категорій */
+    .categories {
+      margin: 50px auto;
+      max-width: 1000px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 3px solid #C9896D;
+      background: #fff;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .card span {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 0 0 6px rgba(0,0,0,0.8);
+    }
+
+    /* 🔹 Адаптивність */
+    @media (max-width: 900px) {
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .categories {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Верхня панель -->
+  <header>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <div>А Пахне Як</div>
+  </header>
+
+  <!-- Друга панель -->
+  <div class="sub-header">
+    <div>Рецепти</div>
+    <div class="search-box">
+      <input type="text" placeholder="Знайти рецепт">
+      🔍
+    </div>
+  </div>
+  <!-- Бокове меню -->
+  <div class="sidebar" id="sidebar">
+    <a href="#">🏠 Головна</a>
+    <a href="#">⭐ Обране</a>
+    <a href="#">📞 Контакти</a>
+    <a href="#">ℹ️ Про нас</a>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+  <!-- Категорії -->
+  <main class="categories">
+    <div class="card"><img src="dessert.jpg" alt=""><span>Десерти</span></div>
+    <div class="card"><img src="bakery.jpg" alt=""><span>Випічка</span></div>
+    <div class="card"><img src="soup.jpg" alt=""><span>Супи</span></div>
+    <div class="card"><img src="snack.jpg" alt=""><span>Закуски</span></div>
+    <div class="card"><img src="side.jpg" alt=""><span>Гарніри</span></div>
+    <div class="card"><img src="meat.jpg" alt=""><span>М'ясо</span></div>
+  </main>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("sidebar").classList.toggle("active");
+      document.getElementById("overlay").classList.toggle("active");
+    }
+
+    function closeMenu() {
+      document.getElementById("sidebar").classList.remove("active");
+      document.getElementById("overlay").classList.remove("active");
+    }
+  </script>
+</body>
+</html>
