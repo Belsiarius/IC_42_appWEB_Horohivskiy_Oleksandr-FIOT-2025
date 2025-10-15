@@ -1,0 +1,227 @@
+/*  Загальні стилі */
+body {
+  margin: 0;
+  font-family: "Kelly Slab", cursive;
+  background: #fdfbf7;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+/* Header */
+header {
+  background: #9E3838;
+  color: #C9896D;
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.logo {
+  font-size: 24px;
+}
+
+.menu-btn {
+  font-size: 30px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #C9896D;
+  transition: transform 0.3s ease;
+}
+
+.menu-btn:hover {
+  transform: scale(1.2);
+}
+
+/*  Sidebar (бургер-меню) */
+.sidebar {
+  position: fixed;
+  left: -250px;
+  top: 0;
+  width: 240px;
+  height: 100%;
+  background: #F3D9A2;
+  display: flex;
+  flex-direction: column;
+  padding-top: 60px;
+  transition: left 0.4s ease;
+  box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.sidebar a {
+  display: block;
+  color: #9E3838;
+  text-decoration: none;
+  font-size: 20px;
+  padding: 15px 25px;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+.sidebar a:hover {
+  background: rgba(158, 56, 56, 0.2);
+  padding-left: 35px;
+}
+
+/*  Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  display: none;
+  z-index: 500;
+}
+
+.overlay.active {
+  display: block;
+}
+
+/* Sub-header */
+.sub-header {
+  background: #C9896D;
+  color: #9E3838;
+  padding: 12px 30px;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 8px 14px;
+  border-radius: 25px;
+  width: 250px;
+  border: 2px solid #9E3838;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  font-size: 15px;
+  flex: 1;
+  background: transparent;
+  color: #333;
+}
+
+/*  Категорії */
+.categories {
+  margin: 40px auto;
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 🔹 максимум 3 у ряд */
+  justify-items: center;
+  align-items: start;
+  gap: 25px;
+  padding: 0 20px;
+}
+
+/* Картки */
+.card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 3px solid #C9896D;
+  background: #fff;
+  aspect-ratio: 1/1;
+  width: 100%;
+  max-width: 280px; /* 🔹 щоб не були надто великі */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+}
+
+.card span {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+}
+
+/*  Footer */
+footer {
+  text-align: center;
+  background: #9E3838;
+  color: #C9896D;
+  padding: 20px 10px;
+  font-size: 16px;
+  margin-top: auto;
+}
+
+/*  Адаптивність */
+@media (max-width: 992px) {
+  .categories {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}
+
+@media (max-width: 600px) {
+  .categories {
+    grid-template-columns: 1fr; 
+  }
+}
+
+@media (max-width: 480px) {
+  .categories {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 0 10px;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+
+  .card span {
+    font-size: 16px;
+  }
+
+  footer {
+    font-size: 14px;
+  }
+}
